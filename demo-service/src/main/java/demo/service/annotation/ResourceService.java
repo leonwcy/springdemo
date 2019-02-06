@@ -3,38 +3,31 @@ package demo.service.annotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import javax.annotation.Resource;
 import java.util.concurrent.ExecutorService;
 
 @Service
-public class AutowiredService implements IService {
-    /***
-     * Autowired 是默认根据类型注入的，而且必须找到唯一符合的对象，如果找到多个则可以定义为数组
-     * Autowired 的实现源码主要是AutowiredAnnotationBeanPostProcessor ，Autowired可以标记在属性和方法上进行注入
-     * 具体的匹配 调用 beanfactory 的 doresolvedependency
-     * Autowired 需要指定名称的时候需要配合注解 Qualifier 使用
-     */
-    @Autowired
+public class ResourceService implements IService {
+
+    @Resource
     ExecutorService[] pools;
 
-    @Autowired
-    @Qualifier(value="stockExecutor")
+    /***
+     * @Resource 优先按照名称查找，在名称查找不到的时候按照类型查找
+     */
+    @Resource(name="stockExecutor")
     ExecutorService firstpool;
 
     ExecutorService secondpool;
 
-    @Autowired
+    @Resource
     ApplicationContext ctx;
 
-    @Autowired(required = false)
-    @Qualifier(value="stockExecutor3")
-    //@Nullable
-    ExecutorService thirdpool;
 
-    @Autowired
+    @Resource
     public void AutowiredService(@Qualifier(value="stockExecutor2") ExecutorService pool)
     {
         secondpool =pool;
@@ -43,6 +36,7 @@ public class AutowiredService implements IService {
     @Override
     public void dowork() {
         Assert.isTrue(pools.length>1,"pools should be more than one");
+        Assert.notNull(firstpool,"firstpool should not be null");
         Assert.notNull(secondpool,"secondpool should not be null");
         Assert.notNull(ctx,"ctx should not be null");
     }

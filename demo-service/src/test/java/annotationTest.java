@@ -1,4 +1,5 @@
 import demo.service.annotation.AutowiredService;
+import demo.service.annotation.ResourceService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,19 @@ import java.util.concurrent.ExecutorService;
 @SpringBootTest
 public class annotationTest {
     @Autowired
-    AutowiredService service;
+    AutowiredService autowiredService;
+
+    @Autowired
+    ResourceService resourceService;
 
     @Test
     public void testAutowiredService(){
-        service.testAutowiredService();
+        autowiredService.dowork();
+    }
+
+    @Test
+    public void testResourceService(){
+        resourceService.dowork();
     }
 
 }
