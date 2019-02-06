@@ -1,2 +1,4 @@
-demo\service\annotation\AutowiredService.class
 demo\service\config\ThreadConfiguation.class
+demo\service\annotation\IService.class
+demo\service\annotation\AutowiredService.class
+demo\service\annotation\ResourceService.class
