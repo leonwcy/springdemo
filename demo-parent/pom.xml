@@ -15,7 +15,7 @@
         <!-- Dependency versions -->
 
         <springboot.version>2.0.0.RELEASE</springboot.version>
-        <spring.version>5.0.2.RELEASE</spring.version>
+        <spring.version>5.0.4.RELEASE</spring.version>
         <aspectj.version>1.8.13</aspectj.version>
         <junit.version>4.12</junit.version>
         <embed.version>2.0.0</embed.version>
